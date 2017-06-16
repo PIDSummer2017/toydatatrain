@@ -1,5 +1,14 @@
-import tensorflow as tf
+import sys
 
+#
+# CHEAP way of setting flags from command line
+#
+USE_BAD_LABEL = False
+for argv in sys.argv:
+    if argv=='use_bad_label':
+        USE_BAD_LABEL=True
+
+import tensorflow as tf
 import toydatagen.toydatagen
 from toydatagen.toydatagen import make_image_library as make_images
 
@@ -73,13 +82,14 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 sess.run(tf.global_variables_initializer())
 
 
-for i in range(10000):
-  batch = make_images()
+for i in range(1000):
+  batch = make_images(100,bad_label=USE_BAD_LABEL)
   if i%100 == 0:
     train_accuracy = accuracy.eval(feed_dict={
         x:batch[0], y_: batch[1], keep_prob: 1.0})
     print("step %d, training accuracy %g"%(i, train_accuracy))
   train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5})
 
+batch = make_images(1000)
 print("test accuracy %g"%accuracy.eval(feed_dict={
-    x: make_images()[0], y_: make_images()[1], keep_prob: 1.0}))
+    x: batch[0], y_: batch[1], keep_prob: 1.0}))
