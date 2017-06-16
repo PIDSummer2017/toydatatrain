@@ -54,11 +54,18 @@ x_image = tf.reshape(x, [-1, 28, 28, 1])
 h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1)+b_conv1)
 h_pool1 = max_pool_2x2(h_conv1)
 
+#
+# h_pool1 output is 14x14
+#
 W_conv2 = weight_variable([5,5,32,28])
 b_conv2 = bias_variable([28])
 
 h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
 h_pool2 = max_pool_2x2(h_conv2)
+
+#
+# h_pool2 output is 7x7
+#
 
 W_fc1 = weight_variable([1372,1024])
 b_fc1 = bias_variable([1024])
