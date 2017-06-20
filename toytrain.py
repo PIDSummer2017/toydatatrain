@@ -98,19 +98,36 @@ saver= tf.train.Saver()
 
 sess.run(tf.global_variables_initializer())
 
+<<<<<<< HEAD
 #MERGE SUMMARIES FOR TENSORBOARD                                               
 merged_summary=tf.summary.merge_all()
+=======
+#
+# h_pool1 output is 14x14
+#
+W_conv2 = weight_variable([5,5,32,28])
+b_conv2 = bias_variable([28])
+>>>>>>> 59cba927e106441b15f0becd9312a316999034b8
 
 #WRITE SUMMARIES TO LOG DIRECTORY LOGS6                                        
 writer=tf.summary.FileWriter("./logs6")
 writer.add_graph(sess.graph)
 
+<<<<<<< HEAD
 #MAKE IMAGES AND TRAINING                                                      
 for _ in range(1000):
     batch = make_images()
     #train_step.run(feed_dict = {x:batch[0], y_:batch[1]})                                       
 #TRAINING                                                                     
 for i in range(1000):
+=======
+#
+# h_pool2 output is 7x7
+#
+
+W_fc1 = weight_variable([1372,1024])
+b_fc1 = bias_variable([1024])
+>>>>>>> 59cba927e106441b15f0becd9312a316999034b8
 
   batch = make_images()
 
